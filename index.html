@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Birthday Gift 🎁</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎁</text></svg>">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/countdown.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Lock Screen / Countdown -->
+    <div id="lockScreen" class="lock-screen">
+        <div class="lock-container">
+            <div class="gift-icon">🎁</div>
+            <h1 class="lock-title">Something Special Awaits...</h1>
+            <p class="lock-subtitle">A birthday surprise made just for you</p>
+            
+            <!-- Countdown Timer -->
+            <div id="countdownTimer" class="countdown-container">
+                <div class="time-unit">
+                    <span id="days" class="time-number">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-unit">
+                    <span id="hours" class="time-number">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-unit">
+                    <span id="minutes" class="time-number">00</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-unit">
+                    <span id="seconds" class="time-number">00</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+            
+            <div class="lock-message">
+                <p>This special gift will unlock on your birthday!</p>
+                <p>Until then, the surprise waits just for you... 💕</p>
+            </div>
+            
+            <!-- Loading dots animation -->
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- Background particles -->
+        <div class="particles"></div>
+    </div>
+
+    <!-- Loading Screen (shows during unlock) -->
+    <div id="loadingScreen" class="loading-screen hidden">
+        <div class="loader-container">
+            <div class="gift-box">
+                <div class="gift-box-lid"></div>
+                <div class="gift-box-body"></div>
+                <div class="gift-ribbon-h"></div>
+                <div class="gift-ribbon-v"></div>
+            </div>
+            <p class="loading-text">Preparing your surprise...</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Gift Content (hidden until unlocked) -->
+    <div id="mainContent" class="main-content hidden">
+        <div class="unlock-message">
+            <h1>🎉 Happy Birthday! 🎉</h1>
+            <p>Your special gift is now ready!</p>
+            <button id="enterGiftBtn" class="enter-btn">Enter Your Gift 💝</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+<!-- Add this to the <body> of each page -->
+<audio id="birthdayAudio" src="/assets/audio/hbd.mp3" loop autoplay></audio>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('birthdayAudio');
+    audio.volume = 0.5; // Use AUDIO_CONFIG.volume
+    // Try to play after user interaction
+    document.body.addEventListener('click', function() {
+        audio.play();
+    }, { once: true });
+});
+</script>

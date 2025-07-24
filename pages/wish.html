@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Wishes 💕</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;600&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Custom Properties */
+        :root {
+            --color-primary: #667eea;
+            --color-secondary: #764ba2;
+            --color-accent: #ff6b6b;
+            --color-success: #feca57;
+            --color-text: #ffffff;
+            
+            --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            --gradient-accent: linear-gradient(45deg, var(--color-accent), var(--color-success));
+            --gradient-glass: rgba(255, 255, 255, 0.15);
+            
+            --font-primary: 'Work Sans', sans-serif;
+            --font-secondary: 'Josefin Slab', serif;
+            
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            
+            --border-radius-lg: 20px;
+            --transition-normal: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--color-text);
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(254, 202, 87, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(72, 219, 251, 0.1) 0%, transparent 50%);
+            animation: backgroundShift 15s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* Floating Memory Images Container */
+        .floating-memories {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 6; /* Higher than container to stay on top */
+            overflow: hidden;
+        }
+
+        .memory-photo {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            object-fit: cover;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            will-change: transform;
+        }
+
+        .memory-photo:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* Main Content Container */
+        .wish-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+            padding: var(--spacing-lg);
+        }
+
+        /* Message Display Area */
+        .message-display {
+            background: var(--gradient-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(255, 107, 107, 0.05) 0%, 
+                rgba(254, 202, 87, 0.05) 50%, 
+                rgba(72, 219, 251, 0.05) 100%);
+            animation: shimmer 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Typing Animation */
+        .animated-message {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: messageAppear 0.8s ease-out forwards;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typewriter Effect */
+        .typewriter {
+            border-right: 3px solid var(--color-accent);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--color-accent); }
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: none;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .navigation-buttons.show {
+            display: flex;
+            animation: buttonsAppear 1s ease-out forwards;
+        }
+
+        @keyframes buttonsAppear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--gradient-accent);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Progress Indicator */
+        .progress-container {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all var(--transition-normal);
+        }
+
+        .progress-dot.active {
+            background: var(--color-accent);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--color-accent);
+        }
+
+        /* Sparkle Effects */
+        .sparkle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: sparkleFloat 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-heart {
+            font-size: 4rem;
+            animation: heartBeat 1.5s ease-in-out infinite;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        .loading-text {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            text-align: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .wish-container {
+                padding: var(--spacing-sm);
+            }
+            
+            .message-display {
+                padding: var(--spacing-lg);
+                min-height: 250px;
+            }
+            
+            .animated-message {
+                font-size: clamp(1rem, 5vw, 1.5rem);
+            }
+            
+            .memory-photo {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .navigation-buttons {
+                gap: var(--spacing-sm);
+            }
+            
+            .nav-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memory-photo {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .message-display {
+                padding: var(--spacing-md);
+                min-height: 200px;
+            }
+            
+            .progress-container {
+                bottom: 20px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-heart">💕</div>
+        <div class="loading-text">Preparing your special messages...</div>
+    </div>
+
+    <!-- Floating Memory Images -->
+    <div class="floating-memories" id="floatingMemories">
+    </div>
+
+    <!-- Sparkle Effects -->
+    <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0s;">✨</div>
+    <div class="sparkle" style="top: 25%; right: 15%; animation-delay: 1s;">⭐</div>
+    <div class="sparkle" style="bottom: 30%; left: 10%; animation-delay: 2s;">💫</div>
+    <div class="sparkle" style="bottom: 20%; right: 20%; animation-delay: 3s;">🌟</div>
+    <div class="sparkle" style="top: 60%; left: 80%; animation-delay: 1.5s;">✨</div>
+
+    <!-- Main Content -->
+    <div class="wish-container">
+        <div class="message-display" id="messageDisplay">
+            <div id="messageText" class="animated-message">
+                Welcome to your special birthday message...
+            </div>
+            
+            <!-- Navigation Buttons (hidden initially) -->
+            <div id="navigationButtons" class="navigation-buttons">
+                <a href="birthday-card.html" class="nav-btn">
+                    🎂 Back to Card
+                </a>
+                <a href="index.html" class="nav-btn">
+                    🏠 Start Over
+                </a>
+                <button onclick="replayMessages()" class="nav-btn">
+                    🔄 Replay Messages
+                </button>
+                <button onclick="window.print()" class="nav-btn">
+                    📄 Save Wishes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-container" id="progressContainer">
+        <!-- Progress dots will be generated by JavaScript -->
+    </div>
+
+    <script>
+        // Configuration
+        const PERSONAL_CONFIG = {
+            name: 'Beautiful',
+            relationship: 'my love',
+            nickname: 'Angel'
+        };
+
+        const animatedMessages = [
+            "Today is beautiful as other days...",
+            "But you realize another year has gone in a blink of an eye",
+            "However... Do you know?",
+            "Today is just special, so special to you",
+            "That's why, let's make it the best celebration ever",
+            "And let me share a piece of happiness with you",
+            "I made all this as a birthday present to you",
+            "Thanks for being there, thanks for the friendship we made",
+            "Thanks for everything",
+            "I wish you all the best",
+            "May your life be at ease",
+            "May all your wishes come true",
+            "Remember your ambitions",
+            "You live as a free bird flying in the blue sky",
+            "Your real story is just about to begin",
+            "Don't worry, because this year will be better",
+            "And I hope you'll find happiness along the way",
+            "Keep your spirit up",
+            "Enjoy every single moment that you experience today",
+            "Fill it with your most beautiful smile",
+            "And make it the best memory",
+            "Lastly... I'd like to wish you one more time",
+            `A very happy birthday, ${PERSONAL_CONFIG.name}! 🎉💕`
+        ];
+
+        // Collision Detection System
+        class CollisionSystem {
+            constructor() {
+                this.elements = [];
+                this.obstacles = [];
+                this.isRunning = false;
+                this.animationId = null;
+                this.friction = 0.98;
+                this.bounceDamping = 0.7;
+            }
+
+            addElement(element, x, y, vx = 0, vy = 0) {
+                const physics = {
+                    element: element,
+                    x: x,
+                    y: y,
+                    vx: vx || (Math.random() - 0.5) * 6,
+                    vy: vy || (Math.random() - 0.5) * 6,
+                    width: element.offsetWidth,
+                    height: element.offsetHeight,
+                    radius: Math.max(element.offsetWidth, element.offsetHeight) / 2
+                };
+                this.elements.push(physics);
+                return physics;
+            }
+
+            addObstacle(element) {
+                const rect = element.getBoundingClientRect();
+                this.obstacles.push({
+                    x: rect.left,
+                    y: rect.top,
+                    width: rect.width,
+                    height: rect.height,
+                    element: element
+                });
+            }
+
+            updateObstacles() {
+                this.obstacles = [];
+                const messageDisplay = document.getElementById('messageDisplay');
+                if (messageDisplay) {
+                    this.addObstacle(messageDisplay);
+                }
+            }
+
+            checkCollision(obj1, obj2) {
+                const dx = obj1.x + obj1.width/2 - (obj2.x + obj2.width/2);
+                const dy = obj1.y + obj1.height/2 - (obj2.y + obj2.height/2);
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const minDistance = obj1.radius + obj2.radius;
+                return distance < minDistance;
+            }
+
+            checkObstacleCollision(element, obstacle) {
+                return !(element.x + element.width < obstacle.x ||
+                        element.x > obstacle.x + obstacle.width ||
+                        element.y + element.height < obstacle.y ||
+                        element.y > obstacle.y + obstacle.height);
+            }
+
+            resolveCollision(el1, el2) {
+                const dx = (el1.x + el1.width/2) - (el2.x + el2.width/2);
+                const dy = (el1.y + el1.height/2) - (el2.y + el2.height/2);
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance === 0) return;
+                
+                const normalX = dx / distance;
+                const normalY = dy / distance;
+                
+                // Separate elements
+                const overlap = (el1.radius + el2.radius) - distance;
+                el1.x += normalX * overlap * 0.5;
+                el1.y += normalY * overlap * 0.5;
+                el2.x -= normalX * overlap * 0.5;
+                el2.y -= normalY * overlap * 0.5;
+                
+                // Exchange velocities (simplified)
+                const tempVx = el1.vx;
+                const tempVy = el1.vy;
+                el1.vx = el2.vx * this.bounceDamping;
+                el1.vy = el2.vy * this.bounceDamping;
+                el2.vx = tempVx * this.bounceDamping;
+                el2.vy = tempVy * this.bounceDamping;
+            }
+
+            resolveObstacleCollision(element, obstacle) {
+                const centerX = element.x + element.width / 2;
+                const centerY = element.y + element.height / 2;
+                
+                const obstacleLeft = obstacle.x;
+                const obstacleRight = obstacle.x + obstacle.width;
+                const obstacleTop = obstacle.y;
+                const obstacleBottom = obstacle.y + obstacle.height;
+                
+                // Find closest point on obstacle to element center
+                const closestX = Math.max(obstacleLeft, Math.min(centerX, obstacleRight));
+                const closestY = Math.max(obstacleTop, Math.min(centerY, obstacleBottom));
+                
+                const dx = centerX - closestX;
+                const dy = centerY - closestY;
+                
+                if (Math.abs(dx) > Math.abs(dy)) {
+                    // Horizontal collision
+                    if (dx > 0) {
+                        element.x = obstacleRight + 5;
+                    } else {
+                        element.x = obstacleLeft - element.width - 5;
+                    }
+                    element.vx = -element.vx * this.bounceDamping;
+                } else {
+                    // Vertical collision
+                    if (dy > 0) {
+                        element.y = obstacleBottom + 5;
+                    } else {
+                        element.y = obstacleTop - element.height - 5;
+                    }
+                    element.vy = -element.vy * this.bounceDamping;
+                }
+                
+                // Add some randomness to prevent getting stuck
+                element.vx += (Math.random() - 0.5) * 0.5;
+                element.vy += (Math.random() - 0.5) * 0.5;
+            }
+
+            update() {
+                if (!this.isRunning) return;
+                
+                this.updateObstacles();
+                
+                // Update element positions
+                this.elements.forEach(element => {
+                    // Apply friction
+                    element.vx *= this.friction;
+                    element.vy *= this.friction;
+                    
+                    // Update position
+    if (Math.abs(element.vx) < 0.05) element.vx += (Math.random() - 0.5) * 0.5;
+    if (Math.abs(element.vy) < 0.05) element.vy += (Math.random() - 0.5) * 0.5;
+               
+    element.x += element.vx;
+    element.y += element.vy;
+                    // Screen boundaries with bounce
+                    if (element.x + element.width < 0) {
+                    element.x = window.innerWidth;
+                    }
+                    if (element.x > window.innerWidth) {
+                        element.x = -element.width;
+                    }
+                    if (element.y + element.height < 0) {
+                        element.y = window.innerHeight;
+                    }
+                    if (element.y > window.innerHeight) {
+                        element.y = -element.height;
+                    }
+                    
+                    // Check obstacle collisions
+                    this.obstacles.forEach(obstacle => {
+                        if (this.checkObstacleCollision(element, obstacle)) {
+                            this.resolveObstacleCollision(element, obstacle);
+                        }
+                    });
+                    
+                    // Apply position to DOM element
+                    element.element.style.transform = `translate(${element.x}px, ${element.y}px)`;
+                });
+                
+                // Check element-to-element collisions
+                for (let i = 0; i < this.elements.length; i++) {
+                    for (let j = i + 1; j < this.elements.length; j++) {
+                        if (this.checkCollision(this.elements[i], this.elements[j])) {
+                            this.resolveCollision(this.elements[i], this.elements[j]);
+                        }
+                    }
+                }
+                
+                this.animationId = requestAnimationFrame(() => this.update());
+            }
+
+            start() {
+                this.isRunning = true;
+                this.update();
+            }
+
+            stop() {
+                this.isRunning = false;
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+        }
+
+        // Initialize collision system
+        const collisionSystem = new CollisionSystem();
+
+        class WishPage {
+            constructor() {
+                this.currentMessageIndex = 0;
+                this.isTyping = false;
+                this.typingSpeed = 80;
+                this.messageDelay = 2500;
+                this.isComplete = false;
+                
+                this.init();
+            }
+
+            init() {
+                this.setupProgressIndicator();
+                this.hideLoading();
+                this.setupMemoryPhotos();
+                this.startMessageSequence();
+                this.setupEventListeners();
+            }
+
+            hideLoading() {
+                setTimeout(() => {
+                    const loadingScreen = document.getElementById('loadingScreen');
+                    loadingScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        // Start collision system after loading
+                        collisionSystem.start();
+                    }, 800);
+                }, 2000);
+            }
+
+            setupMemoryPhotos() {
+                const memoryMedia = [
+  { type: 'img', src: '/assets/images/1.jpg' },
+    { type: 'img', src: '/assets/images/2.PNG' },
+    { type: 'img', src: '/assets/images/3.jpg' },
+    { type: 'img', src: '/assets/images/4.jpg' },
+    { type: 'video', src: '/assets/videos/5.mp4' }, // Example video
+    { type: 'img', src: '/assets/images/6.png' },
+    { type: 'img', src: '/assets/images/7.PNG' },
+    { type: 'img', src: '/assets/images/8.PNG' },
+    { type: 'img', src: '/assets/images/9.jpg' },
+    { type: 'img', src: '/assets/images/10.jpg' },
+    { type: 'img', src: '/assets/images/11.PNG' },
+    { type: 'video', src: '/assets/videos/12.mp4' },
+    { type: 'img', src: '/assets/images/13.jpg' },
+    { type: 'img', src: '/assets/images/14.jpg' },
+    { type: 'img', src: '/assets/images/15.gif' },
+    { type: 'img', src: '/assets/images/16.gif' },
+    { type: 'video', src: '/assets/videos/16.mp4' },
+    { type: 'video', src: '/assets/videos/17.mp4' },
+    { type: 'img', src: '/assets/images/18.png' },
+    { type: 'img', src: '/assets/images/19.PNG' },
+    { type: 'img', src: '/assets/images/20.PNG' },
+    { type: 'img', src: '/assets/images/21.jpg' },
+    { type: 'img', src: '/assets/images/22.jpg' },
+    { type: 'img', src: '/assets/images/23.PNG' },
+    { type: 'img', src: '/assets/images/24.PNG' },
+
+                ];
+
+                const container = document.getElementById('floatingMemories');
+                container.innerHTML = '';
+
+                memoryMedia.forEach((media, index) => {
+                    let el;
+                    if (media.type === 'img') {
+                        el = document.createElement('img');
+                        el.className = 'memory-photo';
+                        el.src = media.src;
+                        el.alt = `Memory ${index + 1}`;
+                        el.loading = 'lazy';
+                        el.onerror = function() {
+                            this.src = `https://picsum.photos/120/120?random=${index + 11}`;
+                        };
+                    } else if (media.type === 'video') {
+                        el = document.createElement('video');
+                        el.className = 'memory-photo';
+                        el.src = media.src;
+                        el.autoplay = true;
+                        el.loop = true;
+                        el.muted = true;
+                        el.playsInline = true;
+                        el.style.objectFit = 'cover';
+                    }
+
+                    // Random starting position (avoiding center area)
+                    let x, y;
+                    do {
+                        x = Math.random() * (window.innerWidth - 120);
+                        y = Math.random() * (window.innerHeight - 120);
+                    } while (x > window.innerWidth * 0.2 && x < window.innerWidth * 0.8 && 
+                             y > window.innerHeight * 0.3 && y < window.innerHeight * 0.7);
+
+                    el.style.position = 'absolute';
+                    el.style.left = '0px';
+                    el.style.top = '0px';
+                    container.appendChild(el);
+
+                    // Add to collision system with random velocity
+                    collisionSystem.addElement(
+                        el, 
+                        x, 
+                        y, 
+                        (Math.random() - 0.5) * 3,
+                        (Math.random() - 0.5) * 3
+                    );
+                });
+            }
+
+            setupProgressIndicator() {
+                const container = document.getElementById('progressContainer');
+                container.innerHTML = '';
+                
+                animatedMessages.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'progress-dot';
+                    dot.id = `dot-${index}`;
+                    container.appendChild(dot);
+                });
+            }
+
+            updateProgressIndicator() {
+                document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                    if (index <= this.currentMessageIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+
+            async startMessageSequence() {
+                for (let i = 0; i < animatedMessages.length; i++) {
+                    this.currentMessageIndex = i;
+                    this.updateProgressIndicator();
+                    
+                    await this.displayMessage(animatedMessages[i]);
+                    
+                    if (i < animatedMessages.length - 1) {
+                        await this.delay(this.messageDelay);
+                    }
+                }
+                
+                this.showNavigationButtons();
+            }
+
+            async displayMessage(message) {
+                return new Promise((resolve) => {
+                    const messageElement = document.getElementById('messageText');
+                    messageElement.textContent = '';
+                    messageElement.classList.remove('typewriter');
+                    
+                    // Add entrance animation
+                    messageElement.style.opacity = '0';
+                    messageElement.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        messageElement.style.opacity = '1';
+                        messageElement.style.transform = 'translateY(0)';
+                        this.typeMessage(message, messageElement, resolve);
+                    }, 300);
+                });
+            }
+
+            typeMessage(message, element, callback) {
+                this.isTyping = true;
+                element.classList.add('typewriter');
+                let index = 0;
+                
+                const type = () => {
+                    if (index < message.length) {
+                        element.textContent += message[index];
+                        index++;
+                        setTimeout(type, this.typingSpeed);
+                    } else {
+                        element.classList.remove('typewriter');
+                        this.isTyping = false;
+                        
+                        // Add completion glow effect
+                        element.style.textShadow = '0 0 20px rgba(255, 255, 255, 0.5)';
+                        setTimeout(() => {
+                            element.style.textShadow = 'none';
+                        }, 1000);
+                        
+                        callback();
+                    }
+                };
+                
+                type();
+            }
+
+            showNavigationButtons() {
+                this.isComplete = true;
+                const buttons = document.getElementById('navigationButtons');
+                buttons.classList.add('show');
+                
+                // Create celebration effect
+                this.createCelebrationEffect();
+                
+                // Hide progress indicator
+                setTimeout(() => {
+                    document.getElementById('progressContainer').style.opacity = '0.3';
+                }, 1000);
+            }
+
+            createCelebrationEffect() {
+                const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#ff7675'];
+                
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        this.createConfetti(colors[Math.floor(Math.random() * colors.length)]);
+                    }, i * 200);
+                }
+                
+                // Add impulse to floating memories for celebration
+                collisionSystem.elements.forEach(element => {
+                    element.vx += (Math.random() - 0.5) * 5;
+                    element.vy += (Math.random() - 0.5) * 5;
+                });
+            }
+
+            createConfetti(color) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${color};
+                    left: ${Math.random() * 100}vw;
+                    top: -20px;
+                    transform: rotate(${Math.random() * 360}deg);
+                    pointer-events: none;
+                    z-index: 1000;
+                    border-radius: 50%;
+                    animation: confettiFall 4s linear forwards;
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    if (confetti.parentNode) {
+                        confetti.parentNode.removeChild(confetti);
+                    }
+                }, 4000);
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            setupEventListeners() {
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.code === 'Space' && this.isComplete) {
+                        e.preventDefault();
+                        this.skipToEnd();
+                    } else if (e.code === 'Enter' && this.isComplete) {
+                        e.preventDefault();
+                        window.location.href = 'birthday-card.html';
+                    }
+                });
+
+                // Click to add impulse to memories
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.nav-btn') && !e.target.closest('.message-display')) {
+                        // Add impulse to nearest memory photo
+                        const clickX = e.clientX;
+                        const clickY = e.clientY;
+                        
+                        collisionSystem.elements.forEach(element => {
+                            const dx = (element.x + element.width/2) - clickX;
+                            const dy = (element.y + element.height/2) - clickY;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (distance < 200) {
+                                const force = Math.max(0, (200 - distance) / 200) * 5;
+                                element.vx += (dx / distance) * force;
+                                element.vy += (dy / distance) * force;
+                            }
+                        });
+                    }
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    collisionSystem.updateObstacles();
+                });
+            }
+
+            skipToEnd() {
+                if (!this.isComplete) {
+                    this.currentMessageIndex = animatedMessages.length - 1;
+                    this.displayMessage(animatedMessages[this.currentMessageIndex]);
+                    this.showNavigationButtons();
+                }
+            }
+        }
+
+        // Global function for replay
+        function replayMessages() {
+            document.getElementById('navigationButtons').classList.remove('show');
+            document.getElementById('progressContainer').style.opacity = '1';
+            
+            // Reset collision system
+            collisionSystem.elements.forEach(element => {
+                element.vx = (Math.random() - 0.5) * 2;
+                element.vy = (Math.random() - 0.5) * 2;
+            });
+            
+            setTimeout(() => {
+                new WishPage();
+            }, 500);
+        }
+
+        // Add required CSS animations
+        const additionalStyles = document.createElement('style');
+        additionalStyles.textContent = `
+            @keyframes confettiFall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(additionalStyles);
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the wish page
+            new WishPage();
+            
+            console.log('💕 Birthday Wishes Page Loaded with Collision Detection');
+            console.log('⌨️  Keyboard shortcuts: Space (skip to end), Enter (go to card)');
+            console.log('🖱️  Click anywhere to push memories away!');
+        });
+
+        // Clean up on page unload
+        window.addEventListener('beforeunload', () => {
+            collisionSystem.stop();
+        });
+    </script>
+</body>
+</html>
+
+<!-- Add this to the <body> of each page -->
+<audio id="birthdayAudio" src="/assets/audio/hbd.mp3" loop autoplay></audio>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('birthdayAudio');
+    audio.volume = 0.5; // Use AUDIO_CONFIG.volume
+    // Try to play after user interaction
+    document.body.addEventListener('click', function() {
+        audio.play();
+    }, { once: true });
+});
+</script>
