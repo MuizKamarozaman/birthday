@@ -5,7 +5,7 @@
 // Change this to her actual birthday date and time
 // And change the date format to be more explicit:
 const BIRTHDAY_CONFIG = {
-    date: '2025-07-26 00:00:00', // Keep it simple
+    date: '2025-06-26 00:00:00', // Keep it simple
     timezone: 'Asia/Kuala_Lumpur'
 };
 
