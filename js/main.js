@@ -291,13 +291,13 @@ class BirthdayGiftApp {
             // Try different navigation methods
             if (typeof window !== 'undefined') {
                 // Method 1: Direct navigation
-                window.location.href = '/pages/birthday-card.html';
+                window.location.href = '/birthday/pages/birthday-card.html';
                 
                 // Fallback methods in case the first doesn't work
                 setTimeout(() => {
-                    if (window.location.href.indexOf('/pages/birthday-card.html') === -1) {
+                    if (window.location.href.indexOf('/birthday/pages/birthday-card.html') === -1) {
                         // Method 2: Replace current location
-                        window.location.replace('/pages/birthday-card.html');
+                        window.location.replace('/birthday/pages/birthday-card.html');
                     }
                 }, 500);
                 
