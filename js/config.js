@@ -81,7 +81,7 @@ const AUDIO_CONFIG = {
     backgroundMusic: '/assets/audio/hbd.mp3',
     
     // Audio settings
-    autoplay: true, // Set to true for autoplay (note: many browsers block autoplay)
+    autoplay: false, // Set to true for autoplay (note: many browsers block autoplay)
     loop: true,
     volume: 0.5 // 0.0 to 1.0
 };

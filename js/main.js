@@ -25,6 +25,7 @@ class BirthdayGiftApp {
         this.setupResponsiveHandling();
         this.loadPersonalization();
         this.preloadAssets();
+        this.setupAudio();
         this.isInitialized = true;
         
         if (DEV_CONFIG.debug) {
@@ -33,7 +34,21 @@ class BirthdayGiftApp {
             console.log('🎨 Theme Config:', THEME_CONFIG.colors);
         }
     }
-    
+    setupAudio() {
+    const audio = document.getElementById('birthdayAudio');
+    if (!audio) return;
+    audio.volume = AUDIO_CONFIG.volume || 0.5;
+    audio.loop = AUDIO_CONFIG.loop !== false;
+    // Only play after user interaction (required by browsers)
+    document.body.addEventListener('click', function playOnce() {
+        audio.play().catch(() => {});
+        document.body.removeEventListener('click', playOnce);
+    });
+    // Optionally autoplay if allowed by browser and config
+    if (AUDIO_CONFIG.autoplay) {
+        audio.play().catch(() => {});
+    }
+}
     bindEvents() {
         // Enter gift button
         const enterGiftBtn = document.getElementById('enterGiftBtn');
@@ -446,24 +461,27 @@ class BirthdayGiftApp {
     }
     
     handleVisibilityChange() {
-        if (document.hidden) {
-            // Page is hidden (user switched tabs)
-            if (DEV_CONFIG.debug) {
-                console.log('👁️ Page hidden');
-            }
-        } else {
-            // Page is visible again
-            if (DEV_CONFIG.debug) {
-                console.log('👁️ Page visible');
-            }
-            
-            // Refresh countdown when page becomes visible again
-            if (window.countdownTimer && !window.countdownTimer.isUnlocked) {
-                window.countdownTimer.updateCountdown();
-            }
+    if (document.hidden) {
+        // Page is hidden (user switched tabs)
+        if (DEV_CONFIG.debug) {
+            console.log('👁️ Page hidden');
+        }
+    } else {
+        // Page is visible again
+        if (DEV_CONFIG.debug) {
+            console.log('👁️ Page visible');
+        }
+
+        // Refresh countdown when page becomes visible again
+        if (
+            window.countdownTimer &&
+            typeof window.countdownTimer.updateCountdown === 'function' &&
+            !window.countdownTimer.isUnlocked
+        ) {
+            window.countdownTimer.updateCountdown();
         }
     }
-    
+}
     // Utility method to create particles effect
     createParticles() {
         const particleContainer = document.querySelector('.particles');

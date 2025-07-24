@@ -17,6 +17,18 @@
     <link rel="stylesheet" href="css/animations.css">
 </head>
 <body>
+        <!-- Birthday Audio -->
+    <audio id="birthdayAudio" src="/assets/audio/hbd.mp3" loop></audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('birthdayAudio');
+            audio.volume = 0.5; // Or AUDIO_CONFIG.volume if available
+            // Play after first user interaction
+            document.body.addEventListener('click', function() {
+                audio.play();
+            }, { once: true });
+        });
+    </script>
     <!-- Lock Screen / Countdown -->
     <div id="lockScreen" class="lock-screen">
         <div class="lock-container">
@@ -95,15 +107,3 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-<!-- Add this to the <body> of each page -->
-<audio id="birthdayAudio" src="/assets/audio/hbd.mp3" loop autoplay></audio>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const audio = document.getElementById('birthdayAudio');
-    audio.volume = 0.5; // Use AUDIO_CONFIG.volume
-    // Try to play after user interaction
-    document.body.addEventListener('click', function() {
-        audio.play();
-    }, { once: true });
-});
-</script>
