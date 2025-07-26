@@ -115,7 +115,7 @@ const DEV_CONFIG = {
     debug: true,
     
     // Test mode - reduces countdown to seconds for testing
-    testMode: false,
+    testMode: true,
     testCountdown: 10 // seconds
 };
 
